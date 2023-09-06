@@ -1,0 +1,86 @@
+
+.menu {
+	animation: menu-appear 1s;
+	background-color: white;
+	border-radius: 1em;
+	margin: 2em auto 1em;
+	max-width: 50em;
+	padding: 1em 1.5em;
+	width: 90%;
+}
+
+@keyframes menu-appear {
+	from {
+		opacity: 0;
+		transform: translateY(2em);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.menu li {
+	align-items: center;
+	border-bottom: 1px solid var(--color-secondary-400);
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1em;
+	padding-bottom: 1em;
+}
+
+.menu div {
+	display: flex;
+	flex-direction: column;
+	gap: .1em;
+}
+
+.menu i {
+	margin: .25em 0;
+}
+
+.menu span {
+	color: var(--color-primary-400);
+	font-weight: bold;
+}
+
+.menu form {
+	display: flex;
+	flex-direction: column;
+	gap: .5em;
+}
+
+.menu label {
+	display: flex;
+	font-weight: bold;
+	gap: .5em;
+}
+
+.menu input {
+	border: 1px solid var(--color-secondary-400);
+	border-radius: .25em;
+	height: 2em;
+	padding-left: .5em;
+	width: 4em;
+}
+
+.menu input:focus {
+	border-color: black;
+	border-width: 2px;
+	outline: none;
+}
+
+.menu button {
+	align-self: flex-end;
+	background-color: var(--color-primary-500);
+	border: none;
+	border-radius: 1em;
+	color: white;
+	cursor: pointer;
+	font-weight: bold;
+	padding: .5em 2.5em;
+}
+
+.menu button:hover {
+	background-color: var(--color-primary-600);
+}

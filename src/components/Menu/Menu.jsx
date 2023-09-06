@@ -1,3 +1,4 @@
+import styles from "./Menu.module.css";
 import MenuItem from "./MenuItem/MenuItem.jsx";
 
 const Menu = ({ submitMenuHandler, formatCurrency }) => {
@@ -29,7 +30,7 @@ const Menu = ({ submitMenuHandler, formatCurrency }) => {
   ];
 
   return (
-    <ul className={"menu"}>
+    <ul className={styles.menu}>
       {menu.map(({ id, name, description, price }) => (
         <MenuItem
           key={id}
@@ -37,7 +38,6 @@ const Menu = ({ submitMenuHandler, formatCurrency }) => {
           name={name}
           description={description}
           price={price}
-          submitMenuHandler={submitMenuHandler}
           formatCurrency={formatCurrency}
         />
       ))}

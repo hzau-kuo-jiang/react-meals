@@ -1,4 +1,17 @@
-const MenuItemForm = ({ id, name, price, submitMenuHandler }) => {
+import { useContext } from "react";
+import CartContext from "../../../store/cart-context.jsx";
+
+const MenuItemForm = ({ id, name, price }) => {
+  const { cart: prevCart, updateCart, pushToCart } = useContext(CartContext);
+
+  function submitMenuHandler(event, { id, name, price }) {
+    event.preventDefault();
+    const addCount = Number(event.target[0].value);
+    prevCart.find((item) => item.id === id)
+      ? updateCart(id, addCount)
+      : pushToCart(id, name, price, addCount);
+  }
+
   return (
     <form onSubmit={(event) => submitMenuHandler(event, { id, name, price })}>
       <label htmlFor={name}>

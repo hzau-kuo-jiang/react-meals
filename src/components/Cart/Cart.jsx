@@ -1,16 +1,23 @@
+import { useContext, useEffect, useState } from "react";
+import CartContext from "../../store/cart-context.jsx";
+import styles from "./Cart.module.css";
 import CartItem from "./CartItem.jsx";
 
-const Cart = ({
-  cart,
-  totalAmount,
-  closeModalHandler,
-  addOneHandler,
-  minusOneHandler,
-  formatCurrency,
-}) => {
+const Cart = ({ closeModalHandler, formatCurrency }) => {
+  const { cart } = useContext(CartContext);
+  const [totalAmount, setTotalAmount] = useState(0);
+
+  useEffect(() => {
+    const totalAmount = cart.reduce((acc, item) => {
+      return acc + item.count * item.price;
+    }, 0);
+    setTotalAmount(totalAmount);
+  }, [cart]);
+
   const CartList = () => {
     return (
-      <ul className={"cart-list"}>
+      // <ul className={"cart-list"}>
+      <ul className={styles["cart-list"]}>
         {cart.map(({ id, name, price, count }) => (
           <CartItem
             key={id}
@@ -18,8 +25,6 @@ const Cart = ({
             name={name}
             price={price}
             count={count}
-            minusOneHandler={minusOneHandler}
-            addOneHandler={addOneHandler}
             formatCurrency={formatCurrency}
           />
         ))}
@@ -28,21 +33,16 @@ const Cart = ({
   };
 
   return (
-    <div className={"cart-container"}>
-      <form className="cart">
-        <CartList
-          cart={cart}
-          minusOneHandler={minusOneHandler}
-          addOneHandler={addOneHandler}
-          formatCurrency={formatCurrency}
-        />
+    <div className={styles["cart-container"]}>
+      <form className={styles["cart"]}>
+        <CartList formatCurrency={formatCurrency} />
 
-        <div className={"total"}>
+        <div className={styles["total"]}>
           <h3>Total Amount</h3>
           <span>{formatCurrency(totalAmount)}</span>
         </div>
 
-        <div className={"actions"}>
+        <div className={styles["actions"]}>
           <button onClick={closeModalHandler}>Close</button>
           {cart.length > 0 && <button>Order</button>}
         </div>

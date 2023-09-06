@@ -1,13 +1,6 @@
 import MenuItemForm from "./MenuItemForm.jsx";
 
-const MenuItem = ({
-  id,
-  name,
-  price,
-  description,
-  formatCurrency,
-  submitMenuHandler,
-}) => {
+const MenuItem = ({ id, name, price, description, formatCurrency }) => {
   return (
     <li>
       <div>
@@ -15,12 +8,7 @@ const MenuItem = ({
         <i>{description}</i>
         <span>{formatCurrency(price)}</span>
       </div>
-      <MenuItemForm
-        id={id}
-        name={name}
-        price={price}
-        submitMenuHandler={submitMenuHandler}
-      />
+      <MenuItemForm id={id} name={name} price={price} />
     </li>
   );
 };

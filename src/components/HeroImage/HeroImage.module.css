@@ -1,0 +1,13 @@
+
+.hero-image {
+	height: 25em;
+	overflow: hidden;
+	width: 100%;
+}
+
+.hero-image img {
+	height: calc(100% - 2em);
+	object-fit: cover;
+	transform: translateY(-2em) translateX(-4em) skewY(-5deg);
+	width: calc(100% + 8em);
+}

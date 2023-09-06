@@ -1,0 +1,22 @@
+
+.advertisement {
+	background-color: #313131;
+	border-radius: 1em;
+	color: white;
+	margin-top: -10em;
+	max-width: 45em;
+	padding: 1em .5em;
+	position: relative;
+	text-align: center;
+	width: 90%;
+	z-index: 1;
+}
+
+.advertisement h2 {
+	font-size: 1.75rem;
+	margin-bottom: .75em;
+}
+
+.advertisement p {
+	margin-bottom: .75em;
+}

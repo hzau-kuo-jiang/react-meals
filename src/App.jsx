@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Advertisement from "./components/Advertisement/Advertisement.jsx";
 import Cart from "./components/Cart/Cart.jsx";
@@ -7,87 +7,7 @@ import HeroImage from "./components/HeroImage/HeroImage.jsx";
 import Menu from "./components/Menu/Menu.jsx";
 
 function App() {
-  const [cart, setCart] = useState([]);
-  const [totalNumber, setTotalNumber] = useState(0);
-  const [totalAmount, setTotalAmount] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const [beBumped, setBeBumped] = useState(false);
-
-  function submitMenuHandler(event, { id, name, price }) {
-    event.preventDefault();
-    const addCount = Number(event.target[0].value);
-    setCart((prevCart) =>
-      prevCart.find((item) => item.id === id)
-        ? updateCart(prevCart, id, addCount)
-        : pushToCart(prevCart, id, name, price, addCount),
-    );
-  }
-
-  function updateCart(prevCart, id, changeCount) {
-    if (
-      changeCount === -1 &&
-      prevCart.find((item) => item.id === id).count === 1
-    ) {
-      return prevCart.filter((item) => item.id !== id);
-    } else {
-      return prevCart.map((item) => {
-        if (item.id === id) {
-          return {
-            ...item,
-            count: item.count + changeCount,
-          };
-        }
-        return item;
-      });
-    }
-  }
-
-  function pushToCart(prevCart, id, name, price, addCount) {
-    return [
-      ...prevCart,
-      {
-        id,
-        name,
-        count: addCount,
-        price,
-      },
-    ];
-  }
-
-  useEffect(() => {
-    const totalNumber = cart.reduce((acc, item) => {
-      return acc + item.count;
-    }, 0);
-    setTotalNumber(totalNumber);
-
-    const totalAmount = cart.reduce((acc, item) => {
-      return acc + item.count * item.price;
-    }, 0);
-    setTotalAmount(totalAmount);
-
-    setBeBumped(true);
-    let timer = setTimeout(() => {
-      setBeBumped(false);
-    }, 300);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [cart]);
-
-  function addOneHandler(event, id) {
-    event.preventDefault();
-    setCart((prevCart) => {
-      return updateCart(prevCart, id, 1);
-    });
-  }
-
-  function minusOneHandler(event, id) {
-    event.preventDefault();
-    setCart((prevCart) => {
-      return updateCart(prevCart, id, -1);
-    });
-  }
 
   const showModalHandler = () => {
     setShowModal(true);
@@ -113,18 +33,11 @@ function App() {
 
   return (
     <>
-      <Header
-        showModalHandler={showModalHandler}
-        totalNumber={totalNumber}
-        beBumped={beBumped}
-      />
+      <Header showModalHandler={showModalHandler} />
       <HeroImage />
       <main>
         <Advertisement />
-        <Menu
-          submitMenuHandler={submitMenuHandler}
-          formatCurrency={formatCurrency}
-        />
+        <Menu formatCurrency={formatCurrency} />
       </main>
 
       <div
@@ -132,11 +45,7 @@ function App() {
         onClick={quickCloseModalHandler}
       >
         <Cart
-          cart={cart}
-          totalAmount={totalAmount}
           closeModalHandler={closeModalHandler}
-          addOneHandler={addOneHandler}
-          minusOneHandler={minusOneHandler}
           formatCurrency={formatCurrency}
         />
       </div>
